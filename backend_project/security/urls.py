@@ -1,19 +1,11 @@
 from django.urls import path
-from . import views
-from .views import SQLInjectionTest,NoSQLMapScan,XSSerScan
+from .views import UserRegister, UserLogin, UserLogout, UserView, AdminUserManagement, UserDetailView
 
 urlpatterns = [
-	path('register', views.UserRegister.as_view(), name='register'),
-	path('login', views.UserLogin.as_view(), name='login'),
-	path('logout', views.UserLogout.as_view(), name='logout'),
-	path('user', views.UserView.as_view(), name='user'),
-    path('sql_injection_test/', SQLInjectionTest.as_view(), name='sql_injection_test'),  # Utilisez la nouvelle vue
-    path('sqlmap_scan/', NoSQLMapScan.as_view(), name='sqlmap_scan'),
-    path('XSSerScan/', XSSerScan.as_view(), name='sqlmap_scan'),
-
-
-
-
-    
+    path('register/', UserRegister.as_view(), name='register'),
+    path('login/', UserLogin.as_view(), name='login'),
+    path('logout/', UserLogout.as_view(), name='logout'),
+    path('user/', UserDetailView.as_view(), name='user_detail'),  # Ajouté pour les détails de l'utilisateur
+    path('admin/users/', AdminUserManagement.as_view(), name='admin_users'),
+    path('admin/users/<int:user_id>/', AdminUserManagement.as_view(), name='admin_user_detail'),
 ]
-
